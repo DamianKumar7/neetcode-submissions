@@ -1,0 +1,33 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        int[][] visited = new int[grid.length][grid[0].length];
+        Queue<int[]> queue = new LinkedList<>();
+        int ans = 0;
+        int[] dx = {0,1,-1,0};
+        int[] dy = {1,0,0,-1};
+        for(int i =0; i <grid.length; i++){
+            for(int j = 0;j <grid[0].length;j++){
+                if(grid[i][j] == '1' && visited[i][j]!= 1){
+                    ans+=1;
+                    queue.add(new int[]{i,j});
+                    visited[i][j] = 1;
+                    while(!queue.isEmpty()){
+                        int[]ele = queue.poll();
+                        int x = ele[0];
+                        int y = ele[1];
+                        for (int d = 0; d < 4; d++) {
+                            int nx = x + dx[d];
+                            int ny = y + dy[d];
+                            if (nx >= 0 && nx < grid.length && ny >= 0 && ny < grid[0].length 
+                                && grid[nx][ny] == '1' && visited[nx][ny] != 1) {
+                                queue.add(new int[]{nx, ny});
+                                visited[nx][ny] = 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+}
