@@ -3,7 +3,6 @@ class Solution {
         int n = s.length();
         boolean[][] dp = new boolean[n][n];
 
-        // Interval DP: fill dp[i][j] bottom-up
         for (int i = n - 1; i >= 0; i--) {
             for (int j = i; j < n; j++) {
                 if (s.charAt(i) == s.charAt(j) && (j - i < 2 || dp[i + 1][j - 1])) {
@@ -23,7 +22,7 @@ class Solution {
             return;
         }
         for (int end = start; end < s.length(); end++) {
-            if (dp[start][end]) { // O(1) lookup instead of re-scanning the substring
+            if (dp[start][end]) { 
                 current.add(s.substring(start, end + 1));
                 backtrack(s, end + 1, current, ans, dp);
                 current.remove(current.size() - 1);
